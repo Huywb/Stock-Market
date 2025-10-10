@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { LogOut } from "lucide-react"
 import NavItem from "./NavItem"
 
-const UserDropdownMenu = () => {
+const UserDropdownMenu = ({user}:{user:User}) => {
   const router = useRouter()
   
   const handleSumit = async () =>{
@@ -22,7 +22,6 @@ const UserDropdownMenu = () => {
   }
 
   const handleSignOut = async()=>{}
-  const user = {name : "Huy", email: "Huypham@gmail.com"}
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
