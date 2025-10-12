@@ -2,6 +2,7 @@ import { success } from "better-auth";
 import { inngest } from "./client";
 import { PERSONALIZED_WELCOME_EMAIL_PROMPT } from "./prompts";
 import { sendWelcomeEmail } from "../nodemailer";
+import { getAllUserForNewEmail } from "../actions/user.actions";
 
 
 export const sendSignupEmail = inngest.createFunction(
@@ -52,4 +53,16 @@ export const sendSignupEmail = inngest.createFunction(
 
     }
 
+)
+
+export const sendDailyNews = inngest.createFunction(
+    {id: 'daily-news-summary'},
+    [{event: 'app/send.daily.news'},  {cron: '0 12 * * *'}],
+    async ({step})=>{
+        const users = await step.run('get-all-user',getAllUserForNewEmail)
+
+        if(!users || users.length == 0 ) return {success: false, message: "No user found for email"}
+        
+ 
+    }
 )
