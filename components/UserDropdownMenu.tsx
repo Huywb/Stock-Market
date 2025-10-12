@@ -13,15 +13,20 @@ import { Button } from "./ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { LogOut } from "lucide-react"
 import NavItem from "./NavItem"
+import { signOut } from "@/lib/actions/auth.actions"
 
 const UserDropdownMenu = ({user}:{user:User}) => {
   const router = useRouter()
   
   const handleSumit = async () =>{
+    await signOut()
     router.push("/sign-in")
   }
 
-  const handleSignOut = async()=>{}
+  const handleSignOut = async()=>{
+    await signOut()
+    router.push("/sign-in")
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
